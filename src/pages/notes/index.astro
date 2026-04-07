@@ -22,7 +22,7 @@ for (const cat in groups) {
   });
 }
 
-const catLabels = {
+const catLabels: Record<string, string> = {
   'mri': 'MRI',
   '大二上': '大二上',
   '大二下': '大二下',
@@ -40,6 +40,16 @@ const sortedCats = [
   ...orderedCats.filter(c => groups[c]),
   ...Object.keys(groups).filter(c => !orderedCats.includes(c))
 ];
+
+// Build search index data (title + excerpt + category for each note)
+const searchIndex = allNotes.map(note => ({
+  slug: note.slug,
+  title: note.data.title,
+  excerpt: note.data.excerpt || '',
+  category: note.data.category || '',
+  topCat: note.slug.split('/')[0] || '其他',
+  date: note.data.date || '',
+}));
 ---
 
 <Base title="课程笔记" activeNav="notes">
@@ -53,46 +63,337 @@ const sortedCats = [
   <section class="section" style="padding-top: 2rem;">
     <div class="container">
 
-      {sortedCats.map(cat => {
-        const notes = groups[cat];
-        if (!notes || notes.length === 0) return null;
-        const label = catLabels[cat] || cat;
-        return (
-          <div style="margin-bottom: 3rem;">
-            <h2 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--primary-deep); margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 2px solid var(--border);">
-              {label}
-              <span style="font-size: .85rem; color: var(--text-faint); font-family: var(--font-body); font-weight: 400; margin-left: .5rem;">{notes.length} 篇</span>
-            </h2>
-            <div class="post-list">
-              {notes.map(note => (
-                <article class="post-item animate-in">
-                  <div>
-                    <div class="post-item-meta">
-                      {note.data.date && (
-                        <>
-                          <span>
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;vertical-align:middle;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                            {new Date(note.data.date).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
-                          </span>
-                          <span class="card-meta-dot"></span>
-                        </>
+      <!-- Search Bar -->
+      <div class="notes-search-wrap">
+        <div class="notes-search-bar">
+          <svg class="notes-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          <input
+            type="text"
+            id="notes-search-input"
+            placeholder="搜索笔记标题、内容或分类…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <kbd class="notes-search-kbd">/</kbd>
+        </div>
+        <div class="notes-filter-bar" id="notes-filter-bar">
+          <button class="filter-btn active" data-cat="all">全部</button>
+          {sortedCats.map(cat => {
+            const label = catLabels[cat] || cat;
+            const count = groups[cat]?.length || 0;
+            return (
+              <button class="filter-btn" data-cat={cat}>
+                {label}
+                <span class="filter-count">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div class="notes-result-bar">
+          <span id="notes-result-count">{allNotes.length} 篇笔记</span>
+        </div>
+      </div>
+
+      <!-- Note Groups -->
+      <div id="notes-groups-container">
+        {sortedCats.map(cat => {
+          const notes = groups[cat];
+          if (!notes || notes.length === 0) return null;
+          const label = catLabels[cat] || cat;
+          return (
+            <div class="note-group" data-cat={cat}>
+              <h2 class="note-group-title">
+                {label}
+                <span class="note-group-count">{notes.length} 篇</span>
+              </h2>
+              <div class="post-list">
+                {notes.map(note => (
+                  <article
+                    class="post-item animate-in note-item"
+                    data-title={note.data.title.toLowerCase()}
+                    data-excerpt={(note.data.excerpt || '').toLowerCase()}
+                    data-category={note.data.category.toLowerCase()}
+                    data-topcat={cat}
+                    data-date={note.data.date || ''}
+                  >
+                    <div>
+                      <div class="post-item-meta">
+                        {note.data.date && (
+                          <>
+                            <span>
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;vertical-align:middle;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                              {new Date(note.data.date).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+                            </span>
+                            <span class="card-meta-dot"></span>
+                          </>
+                        )}
+                        <span style="color: var(--text-faint); font-size: .75rem;">{note.data.category}</span>
+                      </div>
+                      <a href={`/notes/${note.slug}/`} style="text-decoration:none;">
+                        <h3 class="post-item-title" style="font-size: 1.1rem;">{note.data.title}</h3>
+                      </a>
+                      {note.data.excerpt && (
+                        <p class="post-item-excerpt" style="font-size: .875rem;">{note.data.excerpt}</p>
                       )}
-                      <span style="color: var(--text-faint); font-size: .75rem;">{note.data.category}</span>
                     </div>
-                    <a href={`/notes/${note.slug}/`} style="text-decoration:none;">
-                      <h3 class="post-item-title" style="font-size: 1.1rem;">{note.data.title}</h3>
-                    </a>
-                    {note.data.excerpt && (
-                      <p class="post-item-excerpt" style="font-size: .875rem;">{note.data.excerpt}</p>
-                    )}
-                  </div>
-                </article>
-              ))}
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
+
+      <!-- Empty State -->
+      <div id="notes-empty" class="notes-empty" style="display:none;">
+        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🔍</div>
+        <h3 style="font-family: var(--font-display); color: var(--primary-deep); margin-bottom: .5rem;">没有找到相关笔记</h3>
+        <p style="color: var(--text-muted); font-size: .9rem;">换个关键词试试，或清除筛选条件</p>
+        <button id="notes-clear-btn" style="margin-top:1.5rem; background: var(--primary); color: var(--bg); border: none; padding: .5rem 1.5rem; border-radius: var(--radius-full); font-size: .9rem; cursor: pointer;">清除搜索</button>
+      </div>
 
     </div>
   </section>
+
+  <style>
+    /* Search bar */
+    .notes-search-wrap {
+      margin-bottom: 2rem;
+    }
+
+    .notes-search-bar {
+      position: relative;
+      display: flex;
+      align-items: center;
+      margin-bottom: .75rem;
+    }
+
+    .notes-search-icon {
+      position: absolute;
+      left: 14px;
+      width: 18px;
+      height: 18px;
+      color: var(--text-faint);
+      pointer-events: none;
+    }
+
+    #notes-search-input {
+      width: 100%;
+      padding: 12px 60px 12px 44px;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      background: var(--bg-card);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      color: var(--text);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+
+    #notes-search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(196,132,106,.15);
+    }
+
+    #notes-search-input::placeholder {
+      color: var(--text-faint);
+    }
+
+    .notes-search-kbd {
+      position: absolute;
+      right: 14px;
+      background: var(--bg-warm);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 2px 8px;
+      font-size: .75rem;
+      font-family: var(--font-mono);
+      color: var(--text-faint);
+      pointer-events: none;
+    }
+
+    /* Filter bar */
+    .notes-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-bottom: .75rem;
+    }
+
+    .filter-count {
+      background: var(--bg-warm);
+      border-radius: 999px;
+      padding: 0 6px;
+      font-size: .7rem;
+      margin-left: 3px;
+      color: var(--text-faint);
+      transition: background var(--transition), color var(--transition);
+    }
+
+    .filter-btn.active .filter-count {
+      background: rgba(250,247,242,.15);
+      color: rgba(250,247,242,.7);
+    }
+
+    .notes-result-bar {
+      font-size: .8rem;
+      color: var(--text-faint);
+      min-height: 1.2em;
+    }
+
+    /* Note groups */
+    .note-group {
+      margin-bottom: 3rem;
+    }
+
+    .note-group[data-hidden="true"] {
+      display: none;
+    }
+
+    .note-group-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      color: var(--primary-deep);
+      margin-bottom: 1.2rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+    }
+
+    .note-group-count {
+      font-size: .8rem;
+      color: var(--text-faint);
+      font-family: var(--font-body);
+      font-weight: 400;
+    }
+
+    /* Note items */
+    .note-item[data-hidden="true"] {
+      display: none;
+    }
+
+    /* Empty state */
+    .notes-empty {
+      text-align: center;
+      padding: 5rem 1rem;
+    }
+
+    /* Search highlight */
+    mark {
+      background: rgba(196,132,106,.25);
+      color: var(--primary-deep);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+  </style>
+
+  <script define:vars={{ searchIndex }}>
+    const input = document.getElementById('notes-search-input');
+    const filterBtns = document.querySelectorAll('#notes-filter-bar .filter-btn');
+    const resultCount = document.getElementById('notes-result-count');
+    const emptyState = document.getElementById('notes-empty');
+    const groupsContainer = document.getElementById('notes-groups-container');
+    const clearBtn = document.getElementById('notes-clear-btn');
+
+    let currentQuery = '';
+    let currentCat = 'all';
+
+    function getAllItems() {
+      return document.querySelectorAll('.note-item');
+    }
+
+    function getAllGroups() {
+      return document.querySelectorAll('.note-group');
+    }
+
+    function filter() {
+      const q = currentQuery.toLowerCase().trim();
+      let visibleCount = 0;
+      let visibleGroups = new Set();
+
+      // Filter items
+      getAllItems().forEach(item => {
+        const title = item.dataset.title || '';
+        const excerpt = item.dataset.excerpt || '';
+        const category = item.dataset.category || '';
+        const topCat = item.dataset.topcat || '';
+        const catMatch = currentCat === 'all' || topCat === currentCat;
+        const textMatch = !q || title.includes(q) || excerpt.includes(q) || category.includes(q);
+        const show = catMatch && textMatch;
+        item.dataset.hidden = show ? 'false' : 'true';
+        if (show) {
+          visibleCount++;
+          visibleGroups.add(topCat);
+        }
+      });
+
+      // Show/hide groups
+      getAllGroups().forEach(group => {
+        const cat = group.dataset.cat || '';
+        const show = currentCat === 'all' || cat === currentCat;
+        group.dataset.hidden = show ? 'false' : 'true';
+      });
+
+      // Update count
+      if (resultCount) {
+        if (currentCat !== 'all') {
+          resultCount.textContent = `${visibleCount} 篇笔记（${currentQuery ? '匹配搜索' : '在选中分类'}）`;
+        } else if (currentQuery) {
+          resultCount.textContent = `${visibleCount} 篇笔记（匹配"${currentQuery}"）`;
+        } else {
+          resultCount.textContent = `${visibleCount} 篇笔记`;
+        }
+      }
+
+      // Show/hide empty state
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+    }
+
+    // Search input
+    input?.addEventListener('input', e => {
+      currentQuery = e.target.value;
+      filter();
+    });
+
+    // Keyboard shortcut: / to focus search
+    document.addEventListener('keydown', e => {
+      if (e.key === '/' && document.activeElement !== input) {
+        e.preventDefault();
+        input?.focus();
+      }
+      if (e.key === 'Escape' && document.activeElement === input) {
+        input.value = '';
+        currentQuery = '';
+        input?.blur();
+        filter();
+      }
+    });
+
+    // Category filter
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat || 'all';
+        filter();
+      });
+    });
+
+    // Clear button
+    clearBtn?.addEventListener('click', () => {
+      if (input) input.value = '';
+      currentQuery = '';
+      filterBtns.forEach(b => b.classList.remove('active'));
+      filterBtns[0]?.classList.add('active');
+      currentCat = 'all';
+      filter();
+      input?.focus();
+    });
+  </script>
 </Base>
