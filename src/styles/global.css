@@ -1175,6 +1175,79 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-muted);
 }
 
+/* --- KaTeX Math --- */
+/* Block math ($$...$$) — prevent horizontal overflow */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--space-3) 0;
+  /* Slightly smaller than surrounding text for visual hierarchy */
+  font-size: 1.05em;
+}
+
+.katex-display > .katex {
+  /* Ensure katex itself doesn't overflow its container */
+  max-width: 100%;
+  white-space: nowrap;
+}
+
+/* Inline math ($...$) — match body line height */
+.katex {
+  font-size: 1em;
+}
+
+/* --- Article images --- */
+.article-body img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  margin: var(--space-6) auto;
+  display: block;
+  /* Subtle shadow for inline images */
+  box-shadow: var(--shadow-sm);
+}
+
+/* Wide/float images can break out slightly on large screens */
+@media (min-width: 1100px) {
+  .article-body img {
+    max-width: min(100%, 900px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* --- Article table --- */
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-6) 0;
+  font-size: var(--text-base);
+}
+
+.article-body th,
+.article-body td {
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.article-body th {
+  background: var(--bg-warm);
+  font-weight: 600;
+  color: var(--primary-deep);
+  font-family: var(--font-display);
+}
+
+.article-body tr:nth-child(even) td {
+  background: rgba(250,247,242,.5);
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--space-10) 0;
+}
+
 /* --- Gitalk Comments --- */
 .gitalk-container {
   max-width: 760px;

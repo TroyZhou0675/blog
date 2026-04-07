@@ -118,24 +118,24 @@ const searchIndex = allNotes.map(note => ({
                     data-topcat={cat}
                     data-date={note.data.date || ''}
                   >
-                    <div>
+                    <div class="note-item-body">
                       <div class="post-item-meta">
                         {note.data.date && (
                           <>
-                            <span>
+                            <span class="note-date">
                               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;vertical-align:middle;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                              {new Date(note.data.date).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+                              {new Date(note.data.date).toLocaleDateString('zh-CN', { year: 'numeric', month: '2-digit', day: '2-digit' })}
                             </span>
                             <span class="card-meta-dot"></span>
                           </>
                         )}
-                        <span style="color: var(--text-faint); font-size: .75rem;">{note.data.category}</span>
+                        <span class="note-cat-tag">{note.data.category}</span>
                       </div>
-                      <a href={`/notes/${note.slug}/`} style="text-decoration:none;">
-                        <h3 class="post-item-title" style="font-size: 1.1rem;">{note.data.title}</h3>
+                      <a href={`/notes/${note.slug}/`} class="note-title-link">
+                        <h3 class="post-item-title">{note.data.title}</h3>
                       </a>
                       {note.data.excerpt && (
-                        <p class="post-item-excerpt" style="font-size: .875rem;">{note.data.excerpt}</p>
+                        <p class="post-item-excerpt">{note.data.excerpt}</p>
                       )}
                     </div>
                   </article>
@@ -233,8 +233,8 @@ const searchIndex = allNotes.map(note => ({
     }
 
     .filter-btn.active .filter-count {
-      background: rgba(250,247,242,.15);
-      color: rgba(250,247,242,.7);
+      background: rgba(74,55,40,.2);
+      color: var(--primary-deep);
     }
 
     .notes-result-bar {
@@ -288,6 +288,53 @@ const searchIndex = allNotes.map(note => ({
       color: var(--primary-deep);
       border-radius: 2px;
       padding: 0 2px;
+    }
+
+    /* Note items — single column, no right-side aside */
+    .note-item {
+      grid-template-columns: 1fr !important;
+    }
+
+    .note-item:hover::before {
+      background: var(--accent);
+    }
+
+    .note-item-body {
+      width: 100%;
+    }
+
+    .note-title-link {
+      text-decoration: none !important;
+      display: inline-block;
+    }
+
+    .note-date {
+      font-size: .75rem;
+      color: var(--text-faint);
+      display: flex;
+      align-items: center;
+    }
+
+    .note-cat-tag {
+      font-size: .7rem;
+      color: var(--accent);
+      background: rgba(196,132,106,.1);
+      padding: 1px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(196,132,106,.25);
+      font-weight: 500;
+    }
+
+    /* Filter button — consistent active style */
+    .filter-btn.active {
+      background: var(--primary);
+      color: var(--bg);
+      border-color: var(--primary);
+    }
+
+    /* Category group title spacing */
+    .note-group + .note-group {
+      margin-top: 1rem;
     }
   </style>
 
