@@ -913,7 +913,7 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
   gap: var(--space-4);
   margin-bottom: var(--space-8);
-  padding: var(--space-3) var(--space-5);
+  padding: var(--space-3) var(--space-6);
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
