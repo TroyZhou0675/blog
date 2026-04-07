@@ -38,5 +38,3 @@ $$\Phi(\vec r ,t) = \gamma\int_{0}^{t}\vec G(\tau)\cdot\vec rd\tau$$
 6. 完整的信号方程：
 $$s_n(t) = \int m(\vec r )C_n(\vec r)e^{-i2\pi \Delta f_{cs}t}e^{-i2\pi \Delta f_r(\vec r)t}exp(-i\gamma\int_0^t\vec G(\vec t)\cdot \vec r d\tau) dr$$
 
-上一章：1 Pulse Sequence
-下一章：3 Basic Contrast Mechanisms

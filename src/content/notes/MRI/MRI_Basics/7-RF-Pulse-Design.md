@@ -145,5 +145,3 @@ $$M_+(\Delta \omega) \propto \mathcal{F}\{B_1(t)\}$$
 下面是180°翻转角两种设计的效果对比
 
 
-上一章：6 RF Pulses
-下一章：8 Spatial Encoding & K-space

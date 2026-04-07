@@ -25,5 +25,3 @@ $$s(t) = M(\vec k ) = \mathcal{F}\{f(\vec r )\}$$
 
 因此：我们只要通过设计序列，在k-space上收集足够多的数据，就可以通过反向傅里叶得到原图像。
 
-上一章：7 RF Pulse Design
-下一章：9 Image Characteristics

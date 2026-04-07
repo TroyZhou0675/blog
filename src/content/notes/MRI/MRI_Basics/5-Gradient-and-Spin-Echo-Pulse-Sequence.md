@@ -15,5 +15,3 @@ excerpt: |
 
 通过在TE/2的时刻施加180翻转脉冲，让原本领先$\phi$ 的原子落后$-\phi$ 个相位，最终在TE时刻汇聚到一起。
 
-上一章：4 In Vivo Contrast Mechanisms
-下一章：6 RF Pulses

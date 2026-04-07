@@ -27,5 +27,3 @@ $$SAR \propto \int_0^{T_{rf}}|b_1(\tau)|^2d\tau$$
 横轴是频率，纵轴是翻转角度，在翻转角较小时，这个图像和sic函数的傅里叶变换图像十分接近，但是在翻转角很大(90°)，一般用SLR变换研究。
 
 
-上一章：5 Gradient and Spin Echo Pulse Sequence
-下一章：7 RF Pulse Design

@@ -19,5 +19,3 @@ excerpt: |
 ## Contrast Agents
 对比剂：通过改变T1,T2时间来让特定区域变亮
 
-上一章：3 Basic Contrast Mechanisms
-下一章：5 Gradient and Spin Echo Pulse Sequence

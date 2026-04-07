@@ -50,5 +50,3 @@ $$y[n]+\sum_{i=1}^{N} a_iy[n-i] = \sum_{i=0}^{M}b_ix[n-i]$$
 ### 2.2 单位冲激响应
 **定义：** 以单位冲激函数$\delta(t)$作为激励，系统产生的零状态响应称为单位冲击响应，简称冲激响应$h(t)$
 
-上一章：[Lecture 2](大二下/Biomedical Signal Processing/Lecture 2)
-下一章：[Lecture 4](大二下/Biomedical Signal Processing/Lecture 4)

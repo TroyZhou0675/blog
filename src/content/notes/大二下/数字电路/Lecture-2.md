@@ -170,5 +170,3 @@ $$N_{OH} = floor(\frac{I_{OHmax}}{I_{IH}})$$
 - TTL驱动CMOS接上拉电阻或者电平偏移门
 - CMOS驱动TTL采用CMOS驱动器或者同向电流放大器
 
-上一章：[Lecture 1](大二下/数字电路/Lecture 1)
-下一章：[Lecture 3](大二下/数字电路/Lecture 3)

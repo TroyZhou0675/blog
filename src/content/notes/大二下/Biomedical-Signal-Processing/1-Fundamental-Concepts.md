@@ -16,4 +16,3 @@ $$
 $$T = qT_1$$
 
 
-下一章：2 Time-Domain Models of Systems

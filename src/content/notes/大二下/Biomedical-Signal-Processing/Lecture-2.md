@@ -34,5 +34,3 @@ $$x(t) = \int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau$$
 # 系统模型及其分类
 两种经典时变情况：有尺度、系数含有t
 
-上一章：[Lecture 1](大二下/Biomedical Signal Processing/Lecture 1)
-下一章：[Lecture 3](大二下/Biomedical Signal Processing/Lecture 3)

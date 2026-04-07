@@ -69,5 +69,3 @@ $$M(\vec k) = M^*(-\vec k)$$
 需要大量数据训练
 
 
-上一章：9 Image Characteristics
-下一章：11 Imperfections and Artifacts

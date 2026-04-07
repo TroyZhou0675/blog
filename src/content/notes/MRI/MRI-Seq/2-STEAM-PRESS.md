@@ -39,5 +39,3 @@ excerpt: |
 
 
 
-上一章：1 FID & SE
-下一章：3 GRE

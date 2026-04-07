@@ -29,4 +29,3 @@ excerpt: |
 - Active Time($T_{active}$)激活时间----单词重复中，施加射频脉冲和梯度长所需的总时间，这是该序列理论最小重复时间
 
 
-下一章：2 MRI Signal Equation

@@ -17,5 +17,3 @@ $$y(t) = T\{x(t)\}=T\{\int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau\}$$
 $$y(t)=\int_{-\infty}^{\infty}x(\tau)T\{\delta(t-\tau)\}d\tau$$
 $$y(t) = \int_{-\infty}^{\infty}x(\tau)h(t-\tau)d\tau=x(t)*h(t)$$
 
-上一章：[Lecture 3](大二下/Biomedical Signal Processing/Lecture 3)
-下一章：[Lecture 5](大二下/Biomedical Signal Processing/Lecture 5)

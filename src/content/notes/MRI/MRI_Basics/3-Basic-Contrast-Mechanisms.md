@@ -73,5 +73,3 @@ $$E_1 = exp(-TR/T1)$$
 2. FLAIR(Fluid Attenuated Inversion Recovery)----压制脑脊液
 
 
-上一章：2 MRI Signal Equation
-下一章：4 In Vivo Contrast Mechanisms

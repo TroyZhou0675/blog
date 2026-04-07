@@ -46,4 +46,3 @@ excerpt: |
 **窗函数：** 截取作用
 **冲激函数：** 采样作用
 
-下一章：[Lecture 2](大二下/Biomedical Signal Processing/Lecture 2)
