@@ -16,7 +16,5 @@
     "remark-wiki-link": "^2.0.1",
     "unist-util-visit": "^5.1.0"
   },
-  "devDependencies": {
-    "playwright": "^1.59.1"
-  }
+  "devDependencies": {}
 }

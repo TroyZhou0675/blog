@@ -6,7 +6,7 @@ excerpt: |
   在正式Gx梯度之前，我们会施加一个面积为Gx一半的反向梯度。通过这个梯度，我们可以让回波中心正好位于ADC的中心。
 ---
 
-### 1. Gx准备梯度
+### 01. Gx准备梯度
 在正式$G_x$梯度之前，我们会施加一个面积为$G_x$一半的反向梯度。通过这个梯度，我们可以让回波中心正好位于ADC的中心。
 
 
@@ -17,7 +17,7 @@ excerpt: |
 time = round(time/seq.gradRasterTime)*seq.gradRasterTime
 ```
 
-### 3. Spoiler梯度
+### 03. Spoiler梯度
 GRE序列有TR比较短的特点，一般一个重复结束以后横向磁化矢量没有完全衰减。如果不对此处理则会带来对比度混杂和伪影的问题。因此需要通过Spoiler收尾结合RF相位变化联合解决
 **设计细节：**
 1. x,z方向：一般采取整数倍原梯度场的面积，将k-space轨迹“往外推”
@@ -39,43 +39,25 @@ $$\Phi_i = mod(117\degree(i^2+i+2),360\degree)$$
 在代码实现上，我们会在每一次重复当中定义一个新的RF脉冲：
 ```
 for i=1:Ny
-
     % Vary RF phase quasi-randomly
-
     rand_phase = mod(117*(i^2 + i + 2), 360)*pi/180;
-
     [rf, gz] = mr.makeSincPulse(alpha*pi/180, 'Duration', 4e-3,...
-
                                 'SliceThickness', 5e-3, ...
-
                                 'apodization', 0.5, ...
-
                                 'timeBwProduct', 4, ...
-
                                 'system', sys, ...
-
                                 'phaseOffset', rand_phase, ...
-
                                 'use', 'excitation');
 
     seq.addBlock(rf, gz);
-
     gyPre = mr.makeTrapezoid('y', 'Area', phaseAreas(i), 'Duration', 2e-3);
-
     seq.addBlock(gxPre, gyPre, gzReph);
-
     seq.addBlock(mr.makeDelay(delayTE));
-
     seq.addBlock(gx, adc);
-
     gyPost = mr.makeTrapezoid('y', 'Area', -gyPre.area, 'Duration', 2e-3);
-
     % Add spoilers in read and slice and may be in phase
-
     seq.addBlock(gxPost, gyPost, gzPost);
-
     seq.addBlock(mr.makeDelay(delayTR));
-
 end
 ```
 
