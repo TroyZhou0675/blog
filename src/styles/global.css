@@ -751,6 +751,11 @@ h1, h2, h3, h4, h5, h6 {
   padding: var(--space-5) var(--space-5);
   text-align: center;
   transition: all var(--transition);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 110px;
 }
 
 .stat-card:hover {
