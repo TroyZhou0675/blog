@@ -931,8 +931,8 @@ h1, h2, h3, h4, h5, h6 {
   background: none;
   border: 1px solid var(--border);
   color: var(--text-muted);
-  padding: var(--space-1) var(--space-4);
-  border-radius: var(--radius-full);
+  padding: 6px 16px;
+  border-radius: 999px;
   font-size: var(--text-sm);
   cursor: pointer;
   transition: all var(--transition);
