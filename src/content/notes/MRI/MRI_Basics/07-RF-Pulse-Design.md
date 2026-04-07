@@ -117,22 +117,7 @@ $$\frac{dM(t)}{dt}= \gamma M(t)\times B_{eff}(t)$$
 
 矩阵形式：
 
-$$\frac{d}{dt}\begin{bmatrix}
-M_x\\
-M_y\\
-M_z
-\end{bmatrix}
-=\gamma
-\begin{bmatrix}
-0&\Delta B_z&-B_{1y}\\
--\Delta B_z &0&B_{1x}\\
-B_{1y}&-B_{1x}&0
-\end{bmatrix}
-\begin{bmatrix}
-M_x\\
-M_y\\
-M_z
-\end{bmatrix}$$
+$$\frac{d}{dt}\begin{bmatrix}M_x\\ M_y\\ M_z\end{bmatrix}=\gamma\begin{bmatrix}0&\Delta B_z&-B_{1y}\\ -\Delta B_z&0&B_{1x}\\ B_{1y}&-B_{1x}&0\end{bmatrix}\begin{bmatrix}M_x\\ M_y\\ M_z\end{bmatrix}$$
 
 其中 $\Delta B_z=\Delta\omega /\gamma$ 是由离共振造成的纵向等效磁感应强度
 
