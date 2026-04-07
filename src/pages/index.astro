@@ -1,0 +1,184 @@
+---
+import Base from '../layouts/Base.astro';
+import { posts } from '../data/posts.js';
+
+const latestPosts = posts.slice(0, 3);
+---
+
+<Base title="首页" activeNav="home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-avatar">
+          <img
+            src="/images/photo.jpg"
+            alt="TroyZhou的照片"
+            loading="eager"
+          />
+        </div>
+        <div class="hero-content">
+          <h1 class="hero-greeting">你好，我是<span style="color: var(--accent)">TroyZhou</span></h1>
+          <p class="hero-subtitle">
+            浙江大学 · 生物医学工程 · 大二<br/>
+            正在接受 Sequence Design 与 fMRI Analysis 相关科研训练。<br/>
+            用AI提高科研效率，是我的目标。
+          </p>
+          <div class="hero-tags">
+            <span class="hero-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              MRI序列设计
+            </span>
+            <span class="hero-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              fMRI分析
+            </span>
+            <span class="hero-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 9H14V7.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+              AI for Science
+            </span>
+            <span class="hero-tag">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+              爵士乐
+            </span>
+          </div>
+          <div class="hero-links">
+            <a href="https://github.com/YitongZhou" class="hero-link" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="mailto:troyzhou0675@gmail.com" class="hero-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              联系我
+            </a>
+            <a href="/blog/" class="hero-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+              阅读博客
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Posts -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">最近更新</h2>
+        <a href="/blog/" class="section-link">
+          查看全部
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="card-grid stagger-children">
+        {latestPosts.map(post => (
+          <a href={`/blog/${post.slug}/`} class="card" style="text-decoration:none">
+            <div class="card-meta">
+              <span>{new Date(post.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}</span>
+              <span class="card-meta-dot"></span>
+              <span>{post.category}</span>
+            </div>
+            <h3 class="card-title">{post.title}</h3>
+            <p class="card-excerpt">{post.excerpt}</p>
+            <div class="card-footer">
+              <div class="card-tags">
+                {post.tags.slice(0, 2).map(tag => <span class="tag">{tag}</span>)}
+              </div>
+              <span class="card-views">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                {post.views.toLocaleString()}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- MRI Zone -->
+  <section class="section" style="background: var(--bg-warm);">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">MRI 专区</h2>
+        <a href="/mri/" class="section-link">
+          进入专区
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+      <div class="mri-zone-grid stagger-children">
+        <a href="/mri/notes/" class="mri-zone-card mri-zone-card--notes" style="text-decoration:none">
+          <span class="mri-zone-icon">📝</span>
+          <div class="mri-zone-title">学习笔记</div>
+          <p class="mri-zone-desc">
+            从T1/T2基础到序列设计，记录学习MRI物理原理、
+            影像分析方法的完整笔记。正在路上，持续更新。
+          </p>
+          <span class="mri-zone-count">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+            5篇笔记
+          </span>
+        </a>
+        <a href="/mri/logs/" class="mri-zone-card mri-zone-card--logs" style="text-decoration:none">
+          <span class="mri-zone-icon">🧪</span>
+          <div class="mri-zone-title">实验日志</div>
+          <p class="mri-zone-desc">
+            记录在浙大影像实验室的每一次实验过程、数据处理流程
+            和踩坑经验。真实的成长脚印。
+          </p>
+          <span class="mri-zone-count">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            3篇日志
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">关于我</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p class="about-text">
+            浙江大学大二学生，就读于生物医学工程专业。
+            对 MRI 相关科研有浓厚兴趣，目前正接受 Sequence Design
+            和 fMRI Analysis 的系统训练。
+          </p>
+          <div class="about-divider"></div>
+          <p class="about-text">
+            在这个网站，我会记录 MRI 学习的笔记与思考，
+            分享架子鼓、爵士乐和旅行中的瞬间。
+            希望用 AI 提高科研效率，和志同道合的朋友一起成长。
+          </p>
+          <p class="about-text" style="margin-top: 1rem; font-size: 0.9rem; color: var(--text-faint);">
+            联系方式：troyzhou0675@gmail.com
+          </p>
+        </div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <span class="stat-number">2</span>
+            <span class="stat-label">年级</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">浙大</span>
+            <span class="stat-label">生物医学工程</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">🎵</span>
+            <span class="stat-label">爵士鼓</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-number">∞</span>
+            <span class="stat-label">好奇心</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</Base>

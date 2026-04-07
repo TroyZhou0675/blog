@@ -1,0 +1,70 @@
+---
+import Post from '../../layouts/Post.astro';
+---
+
+<Post
+  title="fMRI与BOLD信号：神经活动的非侵入式探测"
+  date="2026-02-28"
+  category="fMRI"
+  tags={['fMRI', 'BOLD', '神经影像']}
+  views={986}
+  excerpt="血氧水平依赖（BOLD）对比是fMRI的基础。本文介绍BOLD信号的生理学来源、时间特性，以及静息态fMRI的基本分析方法。"
+  cover="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&auto=format&fit=crop"
+  activeNav="blog"
+>
+
+## 什么是 BOLD 信号？
+
+血氧水平依赖（Blood Oxygen Level Dependent, BOLD）对比是功能磁共振成像（fMRI）最常用的信号来源。它的基本原理是：
+
+当大脑某个区域活跃时，该区域的血流供应会增加，带来更多氧合血红蛋白，同时带走去氧血红蛋白。由于氧合血红蛋白具有抗磁性而去氧血红蛋白具有顺磁性，局部磁场均匀性在氧合增强后得到改善，MRI信号随之增强——这就是 BOLD 效应。
+
+> **简化记忆**：神经元活动 → 血流增加 → 氧合血红蛋白增多 → T2* 信号增强 → 我们"看见"了大脑在想什么。
+
+## BOLD 信号的时间特性
+
+BOLD 信号并非即时的，它有一个经典的血流动力学响应函数（HRF）：
+
+- **延迟**：神经元发放后约 2–3 秒信号开始上升
+- **达峰**：约 5–6 秒达到峰值
+- **回落**：随后逐渐下降，通常在 10–15 秒内回到基线
+
+这意味着 fMRI 的时间分辨率从根本上受限于血流动力学响应，而非扫描序列本身的速度。
+
+## 任务态 fMRI vs. 静息态 fMRI
+
+### 任务态 fMRI（Task-fMRI）
+
+让被试在扫描仪内执行特定任务（看图、记忆、运动等），比较任务状态与静息状态的 BOLD 信号差异。常用分析方法为一般线性模型（GLM）。
+
+### 静息态 fMRI（Resting-state fMRI）
+
+被试只需放松躺卧、不执行特定任务。通过分析不同脑区 BOLD 信号的低频振荡（&lt; 0.1 Hz）相关性，可以识别出功能网络——最著名的例子是"默认模式网络"（DMN）。
+
+## 常用预处理步骤
+
+```bash
+# 典型 fMRI 预处理流程（基于 fMRIPrep）
+fmriprep participant --task-id bold \
+  --nthreads 8 --mem-mb 16000 \
+  participant_dataset.nii.gz participant_dataset_out/ \
+  participant --force-reanalysis
+```
+
+1. **时间层校正**（Slice-time correction）
+2. **运动校正**（Realignment）
+3. **空间标准化**（Normalize to MNI152）
+4. **空间平滑**（Smooth, FWHM ≈ 6 mm）
+5. **滤波**（Temporal filtering, 0.01–0.1 Hz）
+
+## 入门建议
+
+- 书籍：*Functional MRI: Methods and Applications*（Song 等）
+- 工具：FSL、AFNI、SPM 均提供完整 fMRI 分析流程
+- 数据集：OpenNeuro、HCP（Human Connectome Project）
+
+---
+
+*fMRI 让非侵入式研究人脑成为可能，是神经科学家的强大工具。*
+
+</Post>

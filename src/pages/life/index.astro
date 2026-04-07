@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import { gallery, categories } from '../../data/life.js';
+---
+
+<Base title="兴趣和生活" activeNav="life">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">兴趣和生活</h1>
+      <p class="page-subtitle">旅行、爵士鼓，和那些值得被记住的瞬间</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 2rem;">
+    <div class="container">
+
+      <!-- Filter -->
+      <div class="filter-bar" id="gallery-filter" style="margin-bottom: 2rem;">
+        <span class="filter-label">筛选：</span>
+        {categories.map((cat, i) => (
+          <button
+            class={`filter-btn ${i === 0 ? 'active' : ''}`}
+            data-category={cat === '全部' ? 'all' : cat}
+          >
+            {cat === 'travel' ? '🌍 旅行' : cat === 'music' ? '🎵 音乐' : cat === 'life' ? '☕ 生活' : '全部'}
+          </button>
+        ))}
+      </div>
+
+      <!-- Gallery -->
+      <div class="gallery-grid" id="gallery-grid">
+        {gallery.map((item, i) => (
+          <div
+            class="gallery-item animate-in"
+            data-category={item.category}
+            style={`animation-delay: ${i * 80}ms`}
+          >
+            <img
+              src={item.src}
+              alt={item.caption}
+              loading="lazy"
+            />
+            <div class="gallery-caption">{item.caption}</div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Photo upload tip -->
+  <section class="section" style="padding-top: 0; border-top: 1px solid var(--border); margin-top: 3rem;">
+    <div class="container" style="text-align: center; padding: 3rem 1.5rem;">
+      <div style="font-size: 2.5rem; margin-bottom: 1rem;">📷</div>
+      <h3 style="font-family: var(--font-display); font-size: 1.5rem; color: var(--primary-deep); margin-bottom: .5rem;">
+        上传新照片
+      </h3>
+      <p style="color: var(--text-muted); font-size: .9rem; margin-bottom: 1.5rem;">
+        将照片放入 <code style="font-family: var(--font-mono); font-size: .85em; background: var(--bg-warm); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border);">src/assets/images/travel/</code> 或对应目录，<br/>
+        然后在 <code style="font-family: var(--font-mono); font-size: .85em; background: var(--bg-warm); padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border);">src/data/life.js</code> 中添加条目即可。
+      </p>
+      <a href="/blog/" style="display: inline-flex; align-items: center; gap: .5rem; background: var(--primary); color: var(--bg); padding: .6rem 1.5rem; border-radius: var(--radius-full); font-size: .9rem; transition: all var(--transition);">
+        ← 去看看博客
+      </a>
+    </div>
+  </section>
+
+  <style>
+    .gallery-item[data-hidden="true"] {
+      display: none;
+    }
+  </style>
+
+  <script>
+    const filterBtns = document.querySelectorAll('#gallery-filter [data-category]');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.getAttribute('data-category');
+        galleryItems.forEach(item => {
+          const show = cat === 'all' || item.getAttribute('data-category') === cat;
+          item.setAttribute('data-hidden', show ? 'false' : 'true');
+        });
+      });
+    });
+  </script>
+
+</Base>

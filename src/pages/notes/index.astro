@@ -1,0 +1,66 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const courseNotes = [
+  {
+    subject: '医学影像物理学',
+    notes: [
+      { title: 'X线成像原理', date: '2025-09-10' },
+      { title: 'CT成像基础', date: '2025-09-20' },
+      { title: 'MRI物理学概论', date: '2025-10-05' },
+      { title: '超声成像原理', date: '2025-11-15' },
+    ]
+  },
+  {
+    subject: '信号与系统',
+    notes: [
+      { title: '连续时间信号', date: '2025-08-28' },
+      { title: '傅里叶变换详解', date: '2025-09-05' },
+      { title: '拉普拉斯变换', date: '2025-09-18' },
+    ]
+  },
+  {
+    subject: '机器学习',
+    notes: [
+      { title: '线性回归与逻辑回归', date: '2025-10-01' },
+      { title: '卷积神经网络基础', date: '2025-10-20' },
+      { title: 'U-Net结构解析', date: '2025-11-10' },
+    ]
+  },
+];
+---
+
+<Base title="课程笔记" activeNav="notes">
+
+  <div class="page-header">
+    <div class="container">
+      <h1 class="page-title">课程笔记</h1>
+      <p class="page-subtitle">本科与研究生阶段重要课程的学习笔记，持续整理中</p>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top: 2rem;">
+    <div class="container">
+      <div class="card-grid stagger-children">
+        {courseNotes.map(course => (
+          <div class="card">
+            <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--primary-deep); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem;">
+              <span style="font-size: 1.5rem;">📚</span>
+              {course.subject}
+            </h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: .5rem;">
+              {course.notes.map(note => (
+                <li style="display: flex; align-items: center; gap: .5rem; padding: .4rem 0; border-bottom: 1px dashed var(--border);">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
+                  <a href="#" style="font-size: .9rem; color: var(--text-muted); flex: 1;">{note.title}</a>
+                  <span style="font-size: .75rem; color: var(--text-faint);">{new Date(note.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</Base>

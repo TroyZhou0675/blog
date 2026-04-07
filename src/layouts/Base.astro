@@ -1,0 +1,122 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  activeNav?: string;
+}
+
+const { title, description = '分享知识，结识志同道合的朋友', activeNav } = Astro.props;
+const siteName = "TroyZhou's Page";
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content={description} />
+  <title>{title} · {siteName}</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="/" class="site-logo">
+        <span class="logo-dot"></span>
+        {siteName}
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <nav>
+        <ul class="site-nav" id="site-nav">
+          <li><a href="/" class={activeNav === 'home' ? 'active' : ''}>首页</a></li>
+          <li><a href="/blog/" class={activeNav === 'blog' ? 'active' : ''}>个人博客</a></li>
+          <li><a href="/mri/" class={activeNav === 'mri' ? 'active' : ''}>MRI专区</a></li>
+          <li><a href="/notes/" class={activeNav === 'notes' ? 'active' : ''}>课程笔记</a></li>
+          <li><a href="/life/" class={activeNav === 'life' ? 'active' : ''}>兴趣生活</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <slot />
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">我的个人主页</div>
+          <p class="footer-desc">
+            分享知识，结识志同道合的朋友。<br/>
+            这里记录着学习和生活中值得被记住的瞬间。
+          </p>
+        </div>
+        <div>
+          <div class="footer-heading">导航</div>
+          <ul class="footer-links">
+            <li><a href="/">首页</a></li>
+            <li><a href="/blog/">个人博客</a></li>
+            <li><a href="/mri/">MRI专区</a></li>
+            <li><a href="/notes/">课程笔记</a></li>
+            <li><a href="/life/">兴趣生活</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">联系</div>
+          <ul class="footer-links">
+            <li><a href="mailto:troyzhou0675@gmail.com">Email</a></li>
+            <li><a href="https://github.com/YitongZhou" target="_blank">GitHub</a></li>
+            <li><a href="https://space.bilibili.com/501185459" target="_blank">Bilibili</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-quote">「 Remember what should be remembered. 」</span>
+        <span>© {new Date().getFullYear()} · 用 Astro 构建</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile nav toggle
+    const toggle = document.getElementById('nav-toggle');
+    const nav = document.getElementById('site-nav');
+    toggle?.addEventListener('click', () => {
+      nav?.classList.toggle('open');
+    });
+
+    // Header shadow on scroll
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 10) {
+        header?.classList.add('scrolled');
+      } else {
+        header?.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>
