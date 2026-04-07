@@ -1,5 +1,5 @@
 ---
-title: '6 RF Pulses'
+title: '06 RF Pulses'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: 'sinc函数的带宽与时间带宽积TBW的关系，以及SAR指标说明。'

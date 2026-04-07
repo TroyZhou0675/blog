@@ -1,5 +1,5 @@
 ---
-title: '5 Gradient and Spin Echo Pulse Sequence'
+title: '05 Gradient and Spin Echo Pulse Sequence'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

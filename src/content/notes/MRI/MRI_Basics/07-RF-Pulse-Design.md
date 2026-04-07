@@ -1,5 +1,5 @@
 ---
-title: '7 RF Pulse Design'
+title: '07 RF Pulse Design'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

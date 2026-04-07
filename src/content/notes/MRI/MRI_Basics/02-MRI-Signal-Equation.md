@@ -1,5 +1,5 @@
 ---
-title: '2 MRI Signal Equation'
+title: '02 MRI Signal Equation'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

@@ -1,5 +1,5 @@
 ---
-title: '9 Image Characteristics'
+title: '09 Image Characteristics'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

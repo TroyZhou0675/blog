@@ -1,5 +1,5 @@
 ---
-title: '5 Radial & Spiral'
+title: '05 Radial & Spiral'
 date: '2025-01-01'
 category: 'MRI / MRI Seq'
 excerpt: |

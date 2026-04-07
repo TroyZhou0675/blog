@@ -1,5 +1,5 @@
 ---
-title: '8 Spatial Encoding & K-space'
+title: '08 Spatial Encoding & K-space'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

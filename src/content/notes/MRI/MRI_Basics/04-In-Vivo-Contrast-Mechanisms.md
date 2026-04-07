@@ -1,5 +1,5 @@
 ---
-title: '4 In Vivo Contrast Mechanisms'
+title: '04 In Vivo Contrast Mechanisms'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

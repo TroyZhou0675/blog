@@ -1,5 +1,5 @@
 ---
-title: '1 Pulse Sequence'
+title: '01 Pulse Sequence'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

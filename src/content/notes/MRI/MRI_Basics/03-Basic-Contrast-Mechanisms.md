@@ -1,5 +1,5 @@
 ---
-title: '3 Basic Contrast Mechanisms'
+title: '03 Basic Contrast Mechanisms'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
 excerpt: |

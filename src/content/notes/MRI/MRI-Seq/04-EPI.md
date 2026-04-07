@@ -1,5 +1,5 @@
 ---
-title: '4 EPI'
+title: '04 EPI'
 date: '2025-01-01'
 category: 'MRI / MRI Seq'
 excerpt: |
