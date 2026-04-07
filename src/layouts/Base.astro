@@ -119,6 +119,48 @@ const siteName = "TroyZhou's Page";
         header?.classList.remove('scrolled');
       }
     }, { passive: true });
+
+    // Code block copy button
+    function initCodeCopy() {
+      document.querySelectorAll('.article-body pre').forEach(pre => {
+        if (pre.querySelector('.code-copy-btn')) return;
+        const btn = document.createElement('button');
+        btn.className = 'code-copy-btn';
+        btn.setAttribute('aria-label', '复制代码');
+        btn.innerHTML = `
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <span>复制</span>`;
+        btn.addEventListener('click', async () => {
+          const code = pre.querySelector('code');
+          const text = code?.textContent || pre.textContent || '';
+          try {
+            await navigator.clipboard.writeText(text.trim());
+            btn.classList.add('copied');
+            btn.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span>已复制</span>`;
+            setTimeout(() => {
+              btn.classList.remove('copied');
+              btn.innerHTML = `
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span>复制</span>`;
+            }, 2000);
+          } catch {}
+        });
+        pre.appendChild(btn);
+      });
+    }
+
+    initCodeCopy();
+    document.addEventListener('astro:after-swap', initCodeCopy);
   </script>
 
 </body>
