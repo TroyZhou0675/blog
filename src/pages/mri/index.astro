@@ -1,7 +1,15 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { mriNotes } from '../../data/mri.js';
-import { mriLogs } from '../../data/mri.js';
+import { getCollection } from 'astro:content';
+
+const allNotes = await getCollection('notes');
+const mriNotes = allNotes
+  .filter(n => n.slug.startsWith('mri/'))
+  .sort((a, b) => {
+    const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return db - da;
+  });
 ---
 
 <Base title="MRI专区" activeNav="mri">
@@ -16,65 +24,32 @@ import { mriLogs } from '../../data/mri.js';
   <section class="section" style="padding-top: 2rem;">
     <div class="container">
 
-      <div class="mri-zone-grid" style="margin-bottom: 3rem;">
-        <a href="/mri/notes/" class="mri-zone-card mri-zone-card--notes" style="text-decoration:none;">
-          <span class="mri-zone-icon">📝</span>
-          <div class="mri-zone-title">学习笔记</div>
-          <p class="mri-zone-desc">
-            从序列原理到影像分析，系统的MRI知识整理。
-            持续更新中。
-          </p>
-          <span class="mri-zone-count">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-            {mriNotes.length}篇笔记
-          </span>
-        </a>
-        <a href="/mri/logs/" class="mri-zone-card mri-zone-card--logs" style="text-decoration:none;">
-          <span class="mri-zone-icon">🧪</span>
-          <div class="mri-zone-title">实验日志</div>
-          <p class="mri-zone-desc">
-            在Siemens设备上的实验记录，包含数据处理流程
-            和踩坑经验。
-          </p>
-          <span class="mri-zone-count">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            {mriLogs.length}篇日志
-          </span>
-        </a>
-      </div>
-
-      <!-- Latest Notes Preview -->
-      <div class="section-header">
-        <h2 class="section-title">最新笔记</h2>
-        <a href="/mri/notes/" class="section-link">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <h2 class="section-title">学习笔记</h2>
+        <a href="/notes/" class="section-link">
           查看全部
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
 
-      <div class="card-grid stagger-children" style="margin-bottom: 3rem;">
-        {mriNotes.slice(0, 3).map(note => (
-          <a href={`/mri/notes/${note.slug}/`} class="card" style="text-decoration:none;">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="tag tag--mri">📝 笔记</span>
-              <span class="card-views">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:12px;height:12px"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                {note.views.toLocaleString()}
-              </span>
-            </div>
-            <h3 class="card-title">{note.title}</h3>
-            <p class="card-excerpt">{note.excerpt}</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                {note.tags.slice(0, 3).map(tag => <span class="tag">{tag}</span>)}
+      {mriNotes.length > 0 ? (
+        <div class="card-grid stagger-children" style="margin-bottom: 3rem;">
+          {mriNotes.slice(0, 6).map(note => (
+            <a href={`/notes/${note.slug}/`} class="card" style="text-decoration:none;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="tag tag--mri">📝 笔记</span>
+                <span style="font-size: .75rem; color: var(--text-faint);">
+                  {note.data.date ? new Date(note.data.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' }) : ''}
+                </span>
               </div>
-              <span style="font-size: .75rem; color: var(--text-faint);">
-                {new Date(note.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}
-              </span>
-            </div>
-          </a>
-        ))}
-      </div>
+              <h3 class="card-title" style="margin-top: .5rem;">{note.data.title}</h3>
+              {note.data.excerpt && <p class="card-excerpt">{note.data.excerpt}</p>}
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p style="color: var(--text-muted); text-align: center; padding: 2rem 0;">暂无笔记内容</p>
+      )}
 
     </div>
   </section>

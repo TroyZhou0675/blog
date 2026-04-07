@@ -1,66 +1,98 @@
 ---
 import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
 
-const courseNotes = [
-  {
-    subject: '医学影像物理学',
-    notes: [
-      { title: 'X线成像原理', date: '2025-09-10' },
-      { title: 'CT成像基础', date: '2025-09-20' },
-      { title: 'MRI物理学概论', date: '2025-10-05' },
-      { title: '超声成像原理', date: '2025-11-15' },
-    ]
-  },
-  {
-    subject: '信号与系统',
-    notes: [
-      { title: '连续时间信号', date: '2025-08-28' },
-      { title: '傅里叶变换详解', date: '2025-09-05' },
-      { title: '拉普拉斯变换', date: '2025-09-18' },
-    ]
-  },
-  {
-    subject: '机器学习',
-    notes: [
-      { title: '线性回归与逻辑回归', date: '2025-10-01' },
-      { title: '卷积神经网络基础', date: '2025-10-20' },
-      { title: 'U-Net结构解析', date: '2025-11-10' },
-    ]
-  },
+const allNotes = await getCollection('notes');
+
+// Group by top-level category
+const groups = {};
+for (const note of allNotes) {
+  const parts = note.slug.split('/');
+  const topCat = parts[0] || '其他';
+  if (!groups[topCat]) groups[topCat] = [];
+  groups[topCat].push(note);
+}
+
+// Sort notes within each group by date (newest first)
+for (const cat in groups) {
+  groups[cat].sort((a, b) => {
+    const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return db - da;
+  });
+}
+
+const catLabels = {
+  'mri': 'MRI',
+  '大二上': '大二上',
+  '大二下': '大二下',
+  '工具': '工具',
+  '托福写作训练': '托福写作训练',
+  '数学杂记': '数学杂记',
+  '科研': '科研',
+  '读书笔记': '读书笔记',
+  'misc': '其他',
+  '其他': '其他',
+};
+
+const orderedCats = ['mri', '大二上', '大二下', '工具', '托福写作训练', '数学杂记', '科研', '读书笔记', '其他', 'misc'];
+const sortedCats = [
+  ...orderedCats.filter(c => groups[c]),
+  ...Object.keys(groups).filter(c => !orderedCats.includes(c))
 ];
 ---
 
 <Base title="课程笔记" activeNav="notes">
-
   <div class="page-header">
     <div class="container">
       <h1 class="page-title">课程笔记</h1>
-      <p class="page-subtitle">本科与研究生阶段重要课程的学习笔记，持续整理中</p>
+      <p class="page-subtitle">来自 Obsidian 的学习笔记 · 共 {allNotes.length} 篇</p>
     </div>
   </div>
 
   <section class="section" style="padding-top: 2rem;">
     <div class="container">
-      <div class="card-grid stagger-children">
-        {courseNotes.map(course => (
-          <div class="card">
-            <h3 style="font-family: var(--font-display); font-size: 1.3rem; color: var(--primary-deep); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem;">
-              <span style="font-size: 1.5rem;">📚</span>
-              {course.subject}
-            </h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: .5rem;">
-              {course.notes.map(note => (
-                <li style="display: flex; align-items: center; gap: .5rem; padding: .4rem 0; border-bottom: 1px dashed var(--border);">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-                  <a href="#" style="font-size: .9rem; color: var(--text-muted); flex: 1;">{note.title}</a>
-                  <span style="font-size: .75rem; color: var(--text-faint);">{new Date(note.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}</span>
-                </li>
+
+      {sortedCats.map(cat => {
+        const notes = groups[cat];
+        if (!notes || notes.length === 0) return null;
+        const label = catLabels[cat] || cat;
+        return (
+          <div style="margin-bottom: 3rem;">
+            <h2 style="font-family: var(--font-display); font-size: 1.4rem; color: var(--primary-deep); margin-bottom: 1.2rem; padding-bottom: .5rem; border-bottom: 2px solid var(--border);">
+              {label}
+              <span style="font-size: .85rem; color: var(--text-faint); font-family: var(--font-body); font-weight: 400; margin-left: .5rem;">{notes.length} 篇</span>
+            </h2>
+            <div class="post-list">
+              {notes.map(note => (
+                <article class="post-item animate-in">
+                  <div>
+                    <div class="post-item-meta">
+                      {note.data.date && (
+                        <>
+                          <span>
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px;vertical-align:middle;"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                            {new Date(note.data.date).toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+                          </span>
+                          <span class="card-meta-dot"></span>
+                        </>
+                      )}
+                      <span style="color: var(--text-faint); font-size: .75rem;">{note.data.category}</span>
+                    </div>
+                    <a href={`/notes/${note.slug}/`} style="text-decoration:none;">
+                      <h3 class="post-item-title" style="font-size: 1.1rem;">{note.data.title}</h3>
+                    </a>
+                    {note.data.excerpt && (
+                      <p class="post-item-excerpt" style="font-size: .875rem;">{note.data.excerpt}</p>
+                    )}
+                  </div>
+                </article>
               ))}
-            </ul>
+            </div>
           </div>
-        ))}
-      </div>
+        );
+      })}
+
     </div>
   </section>
-
 </Base>

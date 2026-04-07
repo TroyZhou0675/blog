@@ -1,0 +1,38 @@
+---
+title: 'Lecture 2'
+date: '2025-01-01'
+category: '大二下 / 生物医学信号处理'
+excerpt: |
+  熟悉斜坡，阶跃，单位冲激函数的关系
+---
+
+熟悉斜坡，阶跃，单位冲激函数的**关系**
+单位冲激函数（狄拉克函数）性质：
+宽度变宽->高度变窄（尺度变换需要注意）
+$$\delta (Kt)  =\frac{1}{|K|}\delta(t)$$
+
+离散单位冲激序列：n=0,$\delta [n]=1$
+**离散序列相互关系**
+$$\delta [n] =u[n]-u[n-1]$$
+$$u[n] = \sum_{m=-\infty }^{n}\delta [m]$$
+取样特性：
+$$x[n]\delta[n-n_0] = x[n_0]\delta[n-n_0]$$
+- 等式左边，x[n]代表的是一个序列而不是一个值
+
+## 信号的分解
+1. 直流分量、交流分量
+2. 奇分量、偶分量
+3. 实部、虚部分量
+信号的分解：用什么样的视角，将信号拆分（或者重构）
+
+### 脉冲分量
+$$x[n] = \sum_{k=-\infty}^{\infty}x[k]\delta[n-k]$$
+(拆分成无限个冲激函数的叠加)，任何函数和$\delta t$的卷积等于其本身
+$$x(t) = \int_{-\infty}^{\infty}x(\tau)\delta(t-\tau)d\tau$$
+理想抽样？
+
+# 系统模型及其分类
+两种经典时变情况：有尺度、系数含有t
+
+上一章：[Lecture 1](大二下/Biomedical Signal Processing/Lecture 1)
+下一章：[Lecture 3](大二下/Biomedical Signal Processing/Lecture 3)

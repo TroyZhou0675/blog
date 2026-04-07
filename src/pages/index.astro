@@ -1,8 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-import { posts } from '../data/posts.js';
+import { getCollection } from 'astro:content';
 
-const latestPosts = posts.slice(0, 3);
+const allNotes = await getCollection('notes');
+const latestNotes = [...allNotes]
+  .sort((a, b) => {
+    const da = a.data.date ? new Date(a.data.date).getTime() : 0;
+    const db = b.data.date ? new Date(b.data.date).getTime() : 0;
+    return db - da;
+  })
+  .slice(0, 3);
+
+const mriNotes = allNotes.filter(n => n.slug.startsWith('mri/'));
 ---
 
 <Base title="首页" activeNav="home">
@@ -52,9 +61,9 @@ const latestPosts = posts.slice(0, 3);
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               联系我
             </a>
-            <a href="/blog/" class="hero-link">
+            <a href="/notes/" class="hero-link">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
-              阅读博客
+              浏览笔记
             </a>
           </div>
         </div>
@@ -62,35 +71,30 @@ const latestPosts = posts.slice(0, 3);
     </div>
   </section>
 
-  <!-- Latest Posts -->
+  <!-- Latest Notes -->
   <section class="section">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">最近更新</h2>
-        <a href="/blog/" class="section-link">
+        <a href="/notes/" class="section-link">
           查看全部
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
       <div class="card-grid stagger-children">
-        {latestPosts.map(post => (
-          <a href={`/blog/${post.slug}/`} class="card" style="text-decoration:none">
+        {latestNotes.map(note => (
+          <a href={`/notes/${note.slug}/`} class="card" style="text-decoration:none">
             <div class="card-meta">
-              <span>{new Date(post.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}</span>
+              {note.data.date && (
+                <span>{new Date(note.data.date).toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' })}</span>
+              )}
               <span class="card-meta-dot"></span>
-              <span>{post.category}</span>
+              <span>{note.data.category}</span>
             </div>
-            <h3 class="card-title">{post.title}</h3>
-            <p class="card-excerpt">{post.excerpt}</p>
-            <div class="card-footer">
-              <div class="card-tags">
-                {post.tags.slice(0, 2).map(tag => <span class="tag">{tag}</span>)}
-              </div>
-              <span class="card-views">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                {post.views.toLocaleString()}
-              </span>
-            </div>
+            <h3 class="card-title">{note.data.title}</h3>
+            {note.data.excerpt && (
+              <p class="card-excerpt">{note.data.excerpt}</p>
+            )}
           </a>
         ))}
       </div>
@@ -107,8 +111,8 @@ const latestPosts = posts.slice(0, 3);
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
-      <div class="mri-zone-grid stagger-children">
-        <a href="/mri/notes/" class="mri-zone-card mri-zone-card--notes" style="text-decoration:none">
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem;">
+        <a href="/notes/?cat=mri" class="mri-zone-card mri-zone-card--notes" style="text-decoration:none">
           <span class="mri-zone-icon">📝</span>
           <div class="mri-zone-title">学习笔记</div>
           <p class="mri-zone-desc">
@@ -117,19 +121,7 @@ const latestPosts = posts.slice(0, 3);
           </p>
           <span class="mri-zone-count">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-            5篇笔记
-          </span>
-        </a>
-        <a href="/mri/logs/" class="mri-zone-card mri-zone-card--logs" style="text-decoration:none">
-          <span class="mri-zone-icon">🧪</span>
-          <div class="mri-zone-title">实验日志</div>
-          <p class="mri-zone-desc">
-            记录在浙大影像实验室的每一次实验过程、数据处理流程
-            和踩坑经验。真实的成长脚印。
-          </p>
-          <span class="mri-zone-count">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            3篇日志
+            {mriNotes.length}篇笔记
           </span>
         </a>
       </div>

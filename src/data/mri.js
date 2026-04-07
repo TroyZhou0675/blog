@@ -42,37 +42,4 @@ export const mriNotes = [
   },
 ];
 
-export const mriLogs = [
-  {
-    slug: 'first-fmri-scan',
-    title: '第一次fMRI扫描实验记录',
-    date: '2026-03-25',
-    tags: ['实验记录', 'fMRI', '设备操作'],
-    views: 234,
-    excerpt: '这周在浙大影像实验室完成了第一次fMRI扫描。记录下从被试准备、扫描参数设置到数据导出的完整流程，以及犯的一个小错误。',
-    images: [
-      'https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&auto=format&fit=crop',
-    ],
-  },
-  {
-    slug: 'dicom-to-nifti-pipeline',
-    title: 'DICOM转NIfTI数据预处理流程',
-    date: '2026-02-20',
-    tags: ['实验记录', '数据处理', 'DICOM'],
-    views: 412,
-    excerpt: '用dcm2niix将DICOM批量转换为NIfTI格式，配合FSL做头动校正和脑提取。记录踩坑：Siemens和Philips设备的DICOM字段名不一致问题。',
-    images: [
-      'https://images.unsplash.com/photo-1515879218367-8466d910aaa4?w=400&auto=format&fit=crop',
-    ],
-  },
-  {
-    slug: 'sequence-design-simulations',
-    title: '序列设计仿真实验：改变TR对信噪比的影响',
-    date: '2025-12-28',
-    tags: ['实验记录', '序列设计', '仿真'],
-    views: 198,
-    excerpt: '用MATLAB仿真了不同TR设置下T1WI的信噪比变化。虽然只是仿真实验，但加深了对TR与T1恢复之间关系的理解。',
-    images: [],
-  },
-];
+export const mriLogs = [];
