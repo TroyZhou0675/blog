@@ -1577,24 +1577,37 @@ a.internal-link:hover,
   color: #4a3728 !important;
   border-radius: var(--radius) !important;
   overflow-x: auto;
-  margin: var(--space-6) 0;
-  padding: var(--space-5) var(--space-5) var(--space-5) var(--space-6) !important;
+  margin: var(--space-6) 0 !important;
+  padding: 1rem 1.25rem 1rem 1.75rem !important;
   font-family: var(--font-mono) !important;
   font-size: .875rem !important;
-  line-height: 1.75 !important;
+  line-height: 1.65 !important;
   border: 1px solid #ddd0c0 !important;
   box-shadow: var(--shadow-sm) !important;
+}
+
+/* <code> inside pre — reset defaults, inherit line height */
+.article-body pre.astro-code code {
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: inherit !important;
+}
+
+/* Line wrapper — compact line height */
+.article-body pre.astro-code .line {
+  display: block;
+  line-height: 1.65 !important;
 }
 
 /* All text inside code blocks — force warm color */
 .article-body pre.astro-code,
 .article-body pre.astro-code * {
   color: #4a3728 !important;
-}
-
-.article-body pre.astro-code .line {
-  display: block;
-  line-height: 1.75;
 }
 
 /* Token-level syntax colors */
