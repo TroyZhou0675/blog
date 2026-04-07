@@ -2,17 +2,13 @@
 title: '6 RF Pulses'
 date: '2025-01-01'
 category: 'MRI / MRI基础'
-excerpt: |
-  <div style='display: flex; gap: 10px;'>
+excerpt: 'sinc函数的带宽与时间带宽积TBW的关系，以及SAR指标说明。'
 ---
 
-## sinc函数：
+## sinc函数
 
-<div style="display: flex; gap: 10px;">
-  <img src="Pasted image 20260226172439.png" width="350">
-  <img src="Pasted image 20260226172612.png" width="350">
-</div>
-带宽： $BW = \Delta f=1/zerospacing$
+带宽： $BW = \Delta f = 1/\text{zerospacing}$
+
 sinc函数的带宽积为定值，可以用过零点数量来估算
 
 ## SAR (specific absorption rate)

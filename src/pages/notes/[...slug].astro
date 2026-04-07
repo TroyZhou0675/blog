@@ -47,7 +47,7 @@ const toc = (headings || []).filter(h => h.depth <= 3);
     </div>
 
     <!-- Two-column layout: TOC + Content -->
-    <div class="note-layout">
+    <div class={`note-layout${toc.length === 0 ? ' no-toc' : ''}`}>
       {toc.length > 0 && (
         <aside class="note-toc-sidebar">
           <div class="note-toc">
@@ -171,6 +171,30 @@ const toc = (headings || []).filter(h => h.depth <= 3);
     max-width: 1100px;
     margin: 0 auto;
     padding: 0 1.5rem;
+  }
+
+  /* When TOC is absent, hide empty sidebar and make content full-width */
+  .note-toc-sidebar:empty,
+  .note-toc-sidebar .note-toc-list:empty {
+    display: none;
+  }
+
+  .note-layout.no-toc {
+    grid-template-columns: 1fr !important;
+  }
+
+  .note-layout.no-toc .note-toc-sidebar {
+    display: none;
+  }
+
+  .note-layout.no-toc .note-content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
   }
 
   /* Breadcrumb */
@@ -401,113 +425,5 @@ const toc = (headings || []).filter(h => h.depth <= 3);
     .note-nav-next {
       text-align: right;
     }
-  }
-</style>
-
-<style>
-  .note-article {
-    min-height: 70vh;
-  }
-
-  /* Header — warm background with subtle border */
-  .note-header {
-    background: var(--bg-warm);
-    border-bottom: 1px solid var(--border);
-    padding: 2.5rem 0 2rem;
-  }
-
-  .note-header-inner {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  /* Breadcrumb */
-  .note-breadcrumb {
-    font-size: .8rem;
-    color: var(--text-faint);
-    margin-bottom: .75rem;
-    display: flex;
-    align-items: center;
-    gap: .25rem;
-  }
-
-  .note-breadcrumb a {
-    color: var(--text-muted);
-    transition: color var(--transition);
-  }
-
-  .note-breadcrumb a:hover {
-    color: var(--accent);
-  }
-
-  .breadcrumb-sep {
-    color: var(--text-faint);
-    opacity: .5;
-  }
-
-  /* Title */
-  .note-title {
-    font-family: var(--font-display);
-    font-size: 2.25rem;
-    font-weight: 700;
-    color: var(--primary-deep);
-    line-height: 1.2;
-    margin-bottom: .75rem;
-    letter-spacing: -.5px;
-  }
-
-  /* Meta */
-  .note-meta {
-    font-size: .8rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: .5rem;
-    flex-wrap: wrap;
-  }
-
-  .note-meta-dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background: var(--text-faint);
-    flex-shrink: 0;
-  }
-
-  /* Content area */
-  .note-content {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 5rem;
-  }
-
-  /* Better h3/h4 spacing in article */
-  .article-body h3 {
-    font-size: 1.15rem;
-    margin-top: 2.5rem;
-    margin-bottom: .75rem;
-    padding-bottom: .4rem;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .article-body h4 {
-    font-size: 1rem;
-    margin-top: 2rem;
-    margin-bottom: .5rem;
-    color: var(--secondary);
-  }
-
-  /* Strong/bold */
-  .article-body strong {
-    font-weight: 600;
-    color: var(--primary-deep);
-  }
-
-  /* Horizontal rule */
-  .article-body hr {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 2.5rem 0;
   }
 </style>

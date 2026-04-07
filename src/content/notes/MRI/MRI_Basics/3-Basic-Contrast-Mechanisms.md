@@ -53,10 +53,7 @@ $$E_1 = exp(-TR/T1)$$
 	而T2通常比T1过程快5-10倍，这导致向量的运动轨迹像一个星形线（旋转参考系）。
 
 
-<div style="display: flex; gap: 10px;">
-  <img src="Pasted image 20260226123948.png" width="350">
-  <img src="Pasted image 20260226124135.png" width="350">
-</div>
+> _注：弛豫阶段示意图待补充_
 
 小结：
 不同加权和TE,TR的关系：
