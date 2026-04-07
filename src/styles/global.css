@@ -1136,11 +1136,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .article-body ul, .article-body ol {
-  margin: var(--space-4) 0 var(--space-5) var(--space-6);
+  margin: var(--space-4) 0 var(--space-5) 0;
+  padding-left: 1.5em;
+  list-style-position: inside;
 }
 
 .article-body li {
   margin-bottom: var(--space-2);
+  padding-left: .25em;
 }
 
 .article-body code {
