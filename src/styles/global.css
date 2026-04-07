@@ -1578,7 +1578,7 @@ a.internal-link:hover,
   border-radius: var(--radius) !important;
   overflow-x: auto;
   margin: var(--space-6) 0;
-  padding: var(--space-5) !important;
+  padding: var(--space-5) var(--space-5) var(--space-5) var(--space-6) !important;
   font-family: var(--font-mono) !important;
   font-size: .875rem !important;
   line-height: 1.75 !important;
@@ -1668,10 +1668,10 @@ a.internal-link:hover,
   align-items: center;
   gap: .25rem;
   padding: .3rem .55rem;
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(74,55,40,.06);
+  border: 1px solid rgba(74,55,40,.15);
   border-radius: 6px;
-  color: rgba(205,214,244,.55);
+  color: #a09080;
   font-family: var(--font-body);
   font-size: .7rem;
   cursor: pointer;
@@ -1686,13 +1686,13 @@ a.internal-link:hover,
 }
 
 .code-copy-btn:hover {
-  background: rgba(255,255,255,.14);
-  color: rgba(205,214,244,.9);
+  background: rgba(74,55,40,.12);
+  color: #4a3728;
 }
 
 .code-copy-btn.copied {
-  color: #a6e3a1;
-  border-color: rgba(166,227,161,.3);
+  color: #6B8E5A;
+  border-color: rgba(107,142,90,.3);
   opacity: 1;
 }
 
