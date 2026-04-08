@@ -57,23 +57,24 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         {siteName}
       </a>
 
-      <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <line x1="3" y1="12" x2="21" y2="12"/>
-          <line x1="3" y1="18" x2="21" y2="18"/>
-        </svg>
-      </button>
-
-      <nav>
-        <ul class="site-nav" id="site-nav">
+      <div class="header-right">
+        <nav>
+          <ul class="site-nav" id="site-nav">
           <li><a href="/" class={activeNav === 'home' ? 'active' : ''}>首页</a></li>
           <li><a href="/blog/" class={activeNav === 'blog' ? 'active' : ''}>个人博客</a></li>
           <li><a href="/mri/" class={activeNav === 'mri' ? 'active' : ''}>MRI专区</a></li>
           <li><a href="/notes/" class={activeNav === 'notes' ? 'active' : ''}>课程笔记</a></li>
           <li><a href="/life/" class={activeNav === 'life' ? 'active' : ''}>兴趣生活</a></li>
-        </ul>
-      </nav>
+          </ul>
+        </nav>
+        <button class="nav-toggle" id="nav-toggle" aria-label="菜单">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+        </button>
+      </div>
     </div>
   </header>
 

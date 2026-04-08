@@ -216,6 +216,12 @@ h1, h2, h3, h4, h5, h6 {
   align-items: center;
 }
 
+/* Wrapper for button + nav, stays on right side */
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
 /* Nav toggle always in header-inner, right side */
 .nav-toggle {
   display: none;
@@ -284,10 +290,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  /* Nav is no longer a flex container on mobile */
-  .site-header nav {
-    /* display handled by ul.site-nav below */
-  }
   .nav-toggle {
     display: block;
   }
