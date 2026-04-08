@@ -30,12 +30,6 @@ const isDark = variant === 'dark';
       opacity={isDark ? "0.9" : "0.85"}
     />
   </svg>
-  {!isDark && (
-    <p class="sinc-caption">sinc(x) = sin(x)/x · RF 脉冲 · nLobes = 7 · 14 个过零点</p>
-  )}
-  {isDark && (
-    <p class="sinc-caption sinc-caption--dark">sinc(x) = sin(x)/x · RF 脉冲 · nLobes = 7</p>
-  )}
 </div>
 
 <script is:inline>
@@ -82,18 +76,6 @@ const isDark = variant === 'dark';
     background: #2E1F14;
   }
 
-  .sinc-caption {
-    font-size: 0.78rem;
-    color: #B0A090;
-    text-align: center;
-    margin-top: 0.75rem;
-    margin-bottom: 0;
-    font-family: 'JetBrains Mono', 'Libre Sans', monospace;
-    letter-spacing: 0.3px;
-  }
-  .sinc-caption--dark {
-    color: #8A7060;
-  }
 
   #sinc-main, #sinc-dark {
     stroke-dasharray: 4000;
