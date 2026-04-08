@@ -1,6 +1,6 @@
 ---
 title: '07 RF Pulse Design'
-date: '2025-01-01'
+date: '2026-03-01'
 category: 'MRI / MRI基础'
 excerpt: |
   概述 ：RF Pulse在翻转角小于60°时使用傅里叶变换作为工具，在翻转角为90°，180°时使用SLR(Shinnar-Le Roux)作为工具

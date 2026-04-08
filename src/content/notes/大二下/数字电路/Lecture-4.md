@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 4'
-date: '2025-01-01'
+date: '2026-03-31'
 category: '大二下 / 数字电路'
 excerpt: |
   竞争-冒险：

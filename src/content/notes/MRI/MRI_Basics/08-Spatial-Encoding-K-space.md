@@ -1,7 +1,7 @@
 ---
 
 title: '08 Spatial Encoding & K-space'
-date: '2025-01-01'
+date: '2026-03-03'
 category: 'MRI / MRI基础'
 excerpt: |
   Gy(n) = -G{yp} + (n-1)G{yi}

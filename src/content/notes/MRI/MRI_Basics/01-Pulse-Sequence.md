@@ -1,6 +1,6 @@
 ---
 title: '01 Pulse Sequence'
-date: '2025-01-01'
+date: '2026-02-25'
 category: 'MRI / MRI基础'
 excerpt: |
   在MRI成像中，为了填满k space,需要将基本脉冲序列重复几十次甚至上百次，而每一次的“相位编码梯度”（phase encoding gradient)的强度都会改变。

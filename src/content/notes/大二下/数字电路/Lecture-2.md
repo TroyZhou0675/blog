@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 2'
-date: '2025-01-01'
+date: '2026-03-24'
 category: '大二下 / 数字电路'
 excerpt: |
   真值表，逻辑表达式，卡诺图

@@ -1,6 +1,6 @@
 ---
 title: '01 FID & SE'
-date: '2025-01-01'
+date: '2026-03-26'
 category: 'MRI / MRI Seq'
 excerpt: |
   FID全称：Free Induction Decay 也就是自由感应衰减，是核磁共振成像中最基础的信号。

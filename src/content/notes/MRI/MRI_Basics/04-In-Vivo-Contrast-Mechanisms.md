@@ -1,6 +1,6 @@
 ---
 title: '04 In Vivo Contrast Mechanisms'
-date: '2025-01-01'
+date: '2026-02-26'
 category: 'MRI / MRI基础'
 excerpt: |
   原理： 人体不同组织的导磁率略有不同，这导致不同组织的自选频率不同，产生一种宏观失相。

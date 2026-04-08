@@ -1,7 +1,7 @@
 ---
 
 title: '02 MRI Signal Equation'
-date: '2025-01-01'
+date: '2026-02-25'
 category: 'MRI / MRI基础'
 excerpt: |
   1. 离共振（off resonance)：质子的进动频率偏离了MRI系统设定的中心频率。离共振有很多原因，而化学位移是其中最重要的一个。

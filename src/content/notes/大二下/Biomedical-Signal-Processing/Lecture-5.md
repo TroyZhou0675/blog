@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 5'
-date: '2025-01-01'
+date: '2026-03-31'
 category: '大二下 / 生物医学信号处理'
 excerpt: |
   FIR系统的b系数就是h[n]

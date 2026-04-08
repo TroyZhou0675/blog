@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 5'
-date: '2025-01-01'
+date: '2026-03-31'
 category: '大二下 / 微观经济学'
 excerpt: |
   Total Cost = Variable Cost + Fixed Cost

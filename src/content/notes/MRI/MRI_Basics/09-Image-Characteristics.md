@@ -1,7 +1,7 @@
 ---
 
 title: '09 Image Characteristics'
-date: '2025-01-01'
+date: '2026-03-03'
 category: 'MRI / MRI基础'
 excerpt: |
   视野（FOV) 由采样的步长决定，采样的步长越大，看到的视野越广：

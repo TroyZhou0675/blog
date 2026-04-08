@@ -1,6 +1,6 @@
 ---
 title: '05 Gradient and Spin Echo Pulse Sequence'
-date: '2025-01-01'
+date: '2026-02-26'
 category: 'MRI / MRI基础'
 excerpt: |
   梯度场差异会导致空间自选速度差异，施加反向梯度场可以纠正这种差异，让相位重新聚焦。

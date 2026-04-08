@@ -1,7 +1,7 @@
 ---
 
 title: '11 Imperfections and Artifacts'
-date: '2025-01-01'
+date: '2026-03-08'
 category: 'MRI / MRI基础'
 excerpt: |
   这里最重要的概念就是K-space的权重，我这里拿弛豫导致的衰减权重为例：

@@ -1,6 +1,6 @@
 ---
 title: '03 Basic Contrast Mechanisms'
-date: '2025-01-01'
+date: '2026-02-26'
 category: 'MRI / MRI基础'
 excerpt: |
   T1描述的是质子如何将吸收的能量释放给周围的分子结构（lattice），从而回到平衡态。周围分子的运动节奏和质子进动频率越接近，T1时间就越短。

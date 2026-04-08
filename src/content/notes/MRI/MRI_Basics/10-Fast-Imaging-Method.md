@@ -1,7 +1,7 @@
 ---
 
 title: '10 Fast Imaging Method'
-date: '2025-01-01'
+date: '2026-03-11'
 category: 'MRI / MRI基础'
 excerpt: |
   同一切层由于频率编码/相位编码，需要多次重复采集才能填满k-space.

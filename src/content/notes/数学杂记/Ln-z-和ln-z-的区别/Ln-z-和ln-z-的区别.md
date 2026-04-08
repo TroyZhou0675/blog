@@ -1,6 +1,6 @@
 ---
 title: 'Ln(z)和ln(z)的区别'
-date: '2025-01-01'
+date: '2025-09-27'
 category: '数学杂记 / Ln(z)和ln(z)的区别'
 excerpt: |
      Ln(z) (大写L): 代表 复对数函数 (Complex Logarithm)。

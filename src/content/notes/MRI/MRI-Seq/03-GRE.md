@@ -1,7 +1,7 @@
 ---
 
 title: '03 GRE'
-date: '2025-01-01'
+date: '2026-03-26'
 category: 'MRI / MRI Seq'
 excerpt: |
   在正式Gx梯度之前，我们会施加一个面积为Gx一半的反向梯度。通过这个梯度，我们可以让回波中心正好位于ADC的中心。

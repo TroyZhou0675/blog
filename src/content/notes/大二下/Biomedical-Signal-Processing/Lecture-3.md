@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 3'
-date: '2025-01-01'
+date: '2026-03-24'
 category: '大二下 / 生物医学信号处理'
 excerpt: |
   \delta函数的筛选特性：

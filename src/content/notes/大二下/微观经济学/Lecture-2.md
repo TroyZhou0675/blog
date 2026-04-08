@@ -1,6 +1,6 @@
 ---
 title: 'Lecture 2'
-date: '2025-01-01'
+date: '2026-03-24'
 category: '大二下 / 微观经济学'
 excerpt: |
   最优化假设： 人们总会做出最优化的选择
