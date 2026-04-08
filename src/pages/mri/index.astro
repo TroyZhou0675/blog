@@ -1,5 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
+import SincPulse from '../../components/SincPulse.astro';
 import { getCollection } from 'astro:content';
 
 const allNotes = await getCollection('notes');
@@ -21,7 +22,11 @@ const mriNotes = allNotes
     </div>
   </div>
 
-  <section class="section" style="padding-top: 2rem;">
+  <div class="container" style="padding-top: 0;">
+    <SincPulse />
+  </div>
+
+  <section class="section" style="padding-top: 1rem;">
     <div class="container">
 
       <div class="section-header" style="margin-bottom: 2rem;">

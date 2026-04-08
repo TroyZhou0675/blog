@@ -1,0 +1,126 @@
+---
+// Sinc RF Pulse decoration — nLobes=7, ±7π, 14 zero crossings
+---
+
+<div class="sinc-pulse-wrap" id="sinc-pulse-root">
+  <svg
+    id="sinc-svg"
+    viewBox="0 0 800 42"
+    xmlns="http://www.w3.org/2000/svg"
+    style="display:block; width:100%; overflow:visible;"
+    aria-label="sinc RF pulse waveform"
+    role="img"
+  >
+    <line x1="0" y1="36" x2="800" y2="36" stroke="#D8CFC4" stroke-width="1"/>
+    <path
+      id="sinc-main"
+      d="M 0,36 L 800,36"
+      fill="none"
+      stroke="#C4846A"
+      stroke-width="1.5"
+      opacity="0.85"
+    />
+  </svg>
+  <p class="sinc-caption">sinc(x) = sin(x)/x · RF 脉冲 · nLobes = 7 · 14 个过零点</p>
+</div>
+
+<div class="sinc-pulse-wrap--dark" id="sinc-pulse-dark-root">
+  <svg
+    id="sinc-svg-dark"
+    viewBox="0 0 800 50"
+    xmlns="http://www.w3.org/2000/svg"
+    style="display:block; width:100%; overflow:visible;"
+    aria-label="sinc RF pulse waveform dark variant"
+    role="img"
+  >
+    <line x1="0" y1="44" x2="800" y2="44" stroke="#5A4535" stroke-width="1"/>
+    <path
+      id="sinc-dark"
+      d="M 0,44 L 800,44"
+      fill="none"
+      stroke="#E8B4A0"
+      stroke-width="1.7"
+      opacity="0.9"
+    />
+  </svg>
+</div>
+
+<script>
+  function sincPath(cx: number, yP: number, yB: number, w: number, lobes: number, pts: number) {
+    const half = w / 2;
+    const total = (2 * lobes + 1) * pts + 1;
+    const r: { x: number; y: number }[] = [];
+    for (let i = 0; i < total; i++) {
+      const t = i / (total - 1);
+      const x = (cx - half) + t * w;
+      const u = ((x - cx) / half) * lobes * Math.PI;
+      const s = Math.abs(u) < 1e-9 ? 1 : Math.sin(u) / u;
+      r.push({ x, y: yB - s * (yB - yP) });
+    }
+    return r;
+  }
+
+  function buildPath(pts: { x: number; y: number }[], l: number, r: number, y: number): string {
+    const d = [`M ${l},${y}`, `L ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(2)}`];
+    for (let i = 1; i < pts.length; i++) {
+      const p = pts[i - 1];
+      const c = pts[i];
+      const mx = (p.x + c.x) / 2;
+      d.push(`C ${mx.toFixed(1)},${p.y.toFixed(2)} ${mx.toFixed(1)},${c.y.toFixed(2)} ${c.x.toFixed(1)},${c.y.toFixed(2)}`);
+    }
+    d.push(`L ${r},${pts[pts.length - 1].y.toFixed(2)}`);
+    return d.join(' ');
+  }
+
+  // Light version: baseline y=36, nLobes=7
+  document.getElementById('sinc-main')?.setAttribute(
+    'd',
+    buildPath(sincPath(400, 14, 36, 340, 7, 22), 0, 800, 36)
+  );
+
+  // Dark version: baseline y=44, nLobes=7
+  document.getElementById('sinc-dark')?.setAttribute(
+    'd',
+    buildPath(sincPath(400, 14, 44, 340, 7, 22), 0, 800, 44)
+  );
+</script>
+
+<style>
+  .sinc-pulse-wrap {
+    background: #FFFDF9;
+    border: 1px solid #E0D5C8;
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .sinc-pulse-wrap--dark {
+    background: #2E1F14;
+    border-radius: 12px;
+    padding: 1.5rem 1.5rem 0.75rem;
+    margin-top: 0;
+  }
+
+  .sinc-caption {
+    font-size: 0.78rem;
+    color: #B0A090;
+    text-align: center;
+    margin-top: 0.75rem;
+    margin-bottom: 0;
+    font-family: 'JetBrains Mono', 'Libre Sans', monospace;
+    letter-spacing: 0.3px;
+  }
+
+  /* Draw animation */
+  #sinc-main, #sinc-dark {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: sinc-draw 2.5s ease-out forwards;
+  }
+
+  @keyframes sinc-draw {
+    from { stroke-dashoffset: 2000; opacity: 0; }
+    10%  { opacity: 1; }
+    to   { stroke-dashoffset: 0; opacity: 1; }
+  }
+</style>
