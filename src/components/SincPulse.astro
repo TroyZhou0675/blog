@@ -45,11 +45,11 @@
   </svg>
 </div>
 
-<script>
-  function sincPath(cx: number, yP: number, yB: number, w: number, lobes: number, pts: number) {
+<script is:inline>
+  function sincPath(cx, yP, yB, w, lobes, pts) {
     const half = w / 2;
     const total = (2 * lobes + 1) * pts + 1;
-    const r: { x: number; y: number }[] = [];
+    const r = [];
     for (let i = 0; i < total; i++) {
       const t = i / (total - 1);
       const x = (cx - half) + t * w;
@@ -60,29 +60,25 @@
     return r;
   }
 
-  function buildPath(pts: { x: number; y: number }[], l: number, r: number, y: number): string {
-    const d = [`M ${l},${y}`, `L ${pts[0].x.toFixed(1)},${pts[0].y.toFixed(2)}`];
+  function buildPath(pts, l, r, y) {
+    const d = ['M ' + l + ',' + y, 'L ' + pts[0].x.toFixed(1) + ',' + pts[0].y.toFixed(2)];
     for (let i = 1; i < pts.length; i++) {
-      const p = pts[i - 1];
-      const c = pts[i];
-      const mx = (p.x + c.x) / 2;
-      d.push(`C ${mx.toFixed(1)},${p.y.toFixed(2)} ${mx.toFixed(1)},${c.y.toFixed(2)} ${c.x.toFixed(1)},${c.y.toFixed(2)}`);
+      const p = pts[i - 1], c = pts[i], mx = (p.x + c.x) / 2;
+      d.push('C ' + mx.toFixed(1) + ',' + p.y.toFixed(2) + ' ' + mx.toFixed(1) + ',' + c.y.toFixed(2) + ' ' + c.x.toFixed(1) + ',' + c.y.toFixed(2));
     }
-    d.push(`L ${r},${pts[pts.length - 1].y.toFixed(2)}`);
+    d.push('L ' + r + ',' + pts[pts.length - 1].y.toFixed(2));
     return d.join(' ');
   }
 
-  // Light version: baseline y=36, nLobes=7
-  document.getElementById('sinc-main')?.setAttribute(
-    'd',
-    buildPath(sincPath(400, 14, 36, 340, 7, 22), 0, 800, 36)
-  );
+  function drawSinc() {
+    var main = document.getElementById('sinc-main');
+    var dark = document.getElementById('sinc-dark');
+    if (main) main.setAttribute('d', buildPath(sincPath(400, 14, 36, 340, 7, 22), 0, 800, 36));
+    if (dark) dark.setAttribute('d', buildPath(sincPath(400, 14, 44, 340, 7, 22), 0, 800, 44));
+  }
 
-  // Dark version: baseline y=44, nLobes=7
-  document.getElementById('sinc-dark')?.setAttribute(
-    'd',
-    buildPath(sincPath(400, 14, 44, 340, 7, 22), 0, 800, 44)
-  );
+  drawSinc();
+  document.addEventListener('astro:after-swap', drawSinc);
 </script>
 
 <style>
@@ -111,16 +107,16 @@
     letter-spacing: 0.3px;
   }
 
-  /* Draw animation */
+  /* Draw animation — dasharray must be >> actual path length (~900) */
   #sinc-main, #sinc-dark {
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-    animation: sinc-draw 2.5s ease-out forwards;
+    stroke-dasharray: 4000;
+    stroke-dashoffset: 4000;
+    animation: sinc-draw 2.8s ease-out forwards;
   }
 
   @keyframes sinc-draw {
-    from { stroke-dashoffset: 2000; opacity: 0; }
-    10%  { opacity: 1; }
+    from { stroke-dashoffset: 4000; opacity: 0; }
+    8%   { opacity: 1; }
     to   { stroke-dashoffset: 0; opacity: 1; }
   }
 </style>
