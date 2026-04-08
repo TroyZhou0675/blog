@@ -182,6 +182,7 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 var(--space-6);
+  position: relative;
 }
 
 .site-logo {
@@ -213,6 +214,21 @@ h1, h2, h3, h4, h5, h6 {
 .site-header nav {
   display: flex;
   align-items: center;
+}
+
+/* Nav toggle always in header-inner, right side */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-2);
+}
+
+.nav-toggle svg {
+  width: 22px;
+  height: 22px;
+  fill: var(--bg);
 }
 
 .site-nav {
@@ -268,23 +284,26 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
+  /* Nav is no longer a flex container on mobile */
   .site-header nav {
-    flex-direction: column;
-    align-items: stretch;
+    /* display handled by ul.site-nav below */
   }
   .nav-toggle {
     display: block;
-    margin-left: auto;
-    margin-right: var(--space-2);
   }
   .site-nav {
     display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
     flex-direction: column;
     background: var(--primary-deep);
     padding: var(--space-4);
     gap: var(--space-1);
     border-top: 1px solid rgba(255,255,255,.06);
     box-shadow: 0 8px 24px rgba(0,0,0,.3);
+    z-index: 99;
   }
   .site-nav.open { display: flex; }
   .site-nav a {
