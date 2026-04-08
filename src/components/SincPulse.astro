@@ -64,16 +64,22 @@ const isDark = variant === 'dark';
 
 <style>
   .sinc-wrap {
-    border-radius: 12px;
     padding: 1.5rem 1.5rem 0.75rem;
     margin: 1.5rem 0;
+  }
+  .sinc-wrap--light {
+    border-radius: 12px;
+  }
+  .sinc-wrap--dark {
+    padding: 0;
+    margin: 0;
   }
   .sinc-wrap--light {
     background: #FFFDF9;
     border: 1px solid #E0D5C8;
   }
   .sinc-wrap--dark {
-    background: #2E1F14;
+    /* transparent — parent container provides background */
   }
 
 

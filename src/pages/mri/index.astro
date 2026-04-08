@@ -15,18 +15,19 @@ const mriNotes = allNotes
 
 <Base title="MRI专区" activeNav="mri">
 
-  <div class="page-header">
-    <div class="container">
-      <h1 class="page-title">MRI 专区</h1>
-      <p class="page-subtitle">系统整理MRI学习笔记与实验日志，欢迎一起探讨</p>
+  <div class="mri-hero">
+    <div class="mri-hero__pulse">
+      <SincPulse variant="dark" />
+    </div>
+    <div class="mri-hero__content">
+      <div class="container">
+        <h1 class="mri-hero__title">MRI 专区</h1>
+        <p class="mri-hero__subtitle">系统整理MRI学习笔记与实验日志，欢迎一起探讨</p>
+      </div>
     </div>
   </div>
 
-  <div class="container" style="padding-top: 0;">
-    <SincPulse />
-  </div>
-
-  <section class="section" style="padding-top: 1rem;">
+  <section class="section" style="padding-top: 2.5rem;">
     <div class="container">
 
       <div class="section-header" style="margin-bottom: 2rem;">
@@ -60,3 +61,36 @@ const mriNotes = allNotes
   </section>
 
 </Base>
+
+<style>
+  .mri-hero {
+    position: relative;
+    background: var(--primary-deep);
+    overflow: hidden;
+  }
+
+  .mri-hero__pulse {
+    padding: 2rem 0 0;
+    opacity: 0.85;
+  }
+
+  .mri-hero__content {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .mri-hero__title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--bg);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.5px;
+  }
+
+  .mri-hero__subtitle {
+    font-size: 1rem;
+    color: rgba(250, 247, 242, 0.55);
+    margin: 0;
+    font-weight: 300;
+  }
+</style>
