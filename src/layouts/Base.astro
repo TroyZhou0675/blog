@@ -9,6 +9,7 @@ interface Props {
 
 const { title, description = '分享知识，结识志同道合的朋友', activeNav } = Astro.props;
 const siteName = "TroyZhou's Page";
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!DOCTYPE html>
@@ -22,10 +23,26 @@ const siteName = "TroyZhou's Page";
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+  <!-- Canonical -->
+  <link rel="canonical" href={canonicalURL} />
+
   <!-- Open Graph -->
-  <meta property="og:title" content={title} />
+  <meta property="og:title" content={`${title} · ${siteName}`} />
   <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL} />
   <meta property="og:type" content="website" />
+  <meta property="og:site_name" content={siteName} />
+  <meta property="og:image" content="/images/photo.jpg" />
+  <meta property="og:locale" content="zh_CN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${title} · ${siteName}`} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="/images/photo.jpg" />
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title={`${siteName} RSS`} href="/rss.xml" />
 
   <!-- KaTeX CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" />

@@ -9,12 +9,13 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.1.6",
     "astro": "^4.0.0",
     "mermaid": "^11.14.0",
     "rehype-katex": "^7.0.1",
     "remark-math": "^6.0.0",
     "remark-wiki-link": "^2.0.1",
     "unist-util-visit": "^5.1.0"
-  },
-  "devDependencies": {}
+  }
 }
