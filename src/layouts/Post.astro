@@ -6,14 +6,13 @@ interface Props {
   date: string;
   category?: string;
   tags?: string[];
-  views?: number;
   excerpt?: string;
   cover?: string;
   activeNav?: string;
   readingTime?: number;
 }
 
-const { title, date, category, tags = [], views = 0, excerpt, cover, activeNav, readingTime: minutes } = Astro.props;
+const { title, date, category, tags = [], excerpt, cover, activeNav, readingTime: minutes } = Astro.props;
 
 const formattedDate = new Date(date).toLocaleDateString('zh-CN', {
   year: 'numeric', month: 'long', day: 'numeric',
@@ -44,10 +43,6 @@ const formattedDate = new Date(date).toLocaleDateString('zh-CN', {
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
           {category}
         </span>}
-        <span class="article-meta-item">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-          {views.toLocaleString()} 次阅读
-        </span>
         {minutes && (
           <span class="article-meta-item">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>

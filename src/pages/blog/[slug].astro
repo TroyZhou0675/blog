@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await post.render();
-const { title, date, category, tags, views, excerpt, cover, pinned } = post.data;
+const { title, date, category, tags, excerpt, cover, pinned } = post.data;
 const minutes = readingTime(post.body);
 ---
 <Post
@@ -21,7 +21,6 @@ const minutes = readingTime(post.body);
   date={date}
   category={category}
   tags={tags}
-  views={views}
   excerpt={excerpt}
   cover={cover}
   readingTime={minutes}
