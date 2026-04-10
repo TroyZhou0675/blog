@@ -1,7 +1,7 @@
 ---
 title: "TSE序列修改日志：梯度衔接问题排查"
 date: "2026-04-09"
-category: "MRI / TSE序列"
+category: "MRI / 实验日志"
 excerpt: "修改TSE序列，添加Spoiler收尾梯度和激发脉冲层选梯度时遇到梯度幅值超限报错，以及波形衔接处出现明显瑕疵的排查过程。"
 ---
 

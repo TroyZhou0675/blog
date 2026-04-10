@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 
 const allNotes = await getCollection('notes');
 const mriNotes = allNotes
-  .filter(n => n.slug.startsWith('mri/'))
+  .filter(n => n.slug.startsWith('mri/') && n.data.category !== 'MRI / 实验日志')
   .sort((a, b) => {
     const da = a.data.date ? new Date(a.data.date).getTime() : 0;
     const db = b.data.date ? new Date(b.data.date).getTime() : 0;
