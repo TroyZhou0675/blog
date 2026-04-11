@@ -338,7 +338,7 @@ h1, h2, h3, h4, h5, h6 {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-10);
-  align-items: center;
+  align-items: start;
   padding: var(--space-12) 0;
 }
 
