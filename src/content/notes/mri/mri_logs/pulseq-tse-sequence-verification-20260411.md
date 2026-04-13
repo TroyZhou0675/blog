@@ -1,5 +1,5 @@
 ---
-title: "实验设计："
+title: "TSE序列验证01"
 date: "2026-04-11"
 category: "MRI / 实验日志"
 excerpt: "配置西门子pulseq环境，采用多种TSE序列进行重建实验，记录了相位编码重排与TR过短导致Aliasing问题的排查过程。"
